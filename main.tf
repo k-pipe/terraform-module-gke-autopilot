@@ -68,6 +68,6 @@ resource "helm_release" "pipeline-operator" {
       "nodeSelectorMap=topology.kubernetes.io/zone=${var.zone}",
       "env.storageClass=standard-${var.zone}",
       "storageClass=standard-${var.zone}",
-      "fixedInitCommands=mkdir input && ln -s /etc/config/config.json input/config.json"
+      "fixedInitCommands='mkdir input && ln -s /etc/config/config.json input/config.json'"
   ]
 }
