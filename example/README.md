@@ -54,3 +54,6 @@ gcloud container clusters get-credentials my-first-gcp-project --zone europe-wes
 ```
 in order to get the credentials to use `kubectl`.
 As next step you may follow the getting started instructions of the [helm chart](https://helm.k-pipe.cloud/).
+
+**NOTE:** We recommend to check in the 5 files used for provisioning into a git repository, so
+that provisioning can be reproduced at a later time and changes to the configuration may be tracked.
