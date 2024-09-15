@@ -25,4 +25,6 @@ The terraform module sets up the following ressources:
 
 ## Example
 
-An example on how to use this terraform module in order to setup  one or multiple GKC
+An example on how to use this terraform module in order to setup one or multiple GKE clusters for pipeline 
+processing can be found in [subfolder example](./example) (simply download 
+all files in this folder and follow the instructions in the file [README.md](./example/README.md) .
