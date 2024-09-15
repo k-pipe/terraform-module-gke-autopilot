@@ -64,10 +64,20 @@ resource "helm_release" "pipeline-operator" {
   create_namespace = true
   recreate_pods    = true
   force_update     = true
-  values           = [
-      "nodeSelectorMap='topology.kubernetes.io/zone=${var.zone}'",
-      "env.storageClass=standard-${var.zone}",
-      "storageClass=standard-${var.zone}",
-      "fixedInitCommands='mkdir input && ln -s /etc/config/config.json input/config.json'"
-  ]
+  set {
+    name  = "nodeSelectorMap"
+    value = "topology.kubernetes.io/zone=${var.zone}"
+  }
+  set {
+    name  = "storageClass"
+    value = "standard-${var.zone}"
+  }
+  set {
+    name  = "env.storageClass"
+    value = "standard-${var.zone}"
+  }
+  set {
+    name  = "fixedInitCommands"
+    value = "mkdir input && ln -s /etc/config/config.json input/config.json"
+  }
 }
