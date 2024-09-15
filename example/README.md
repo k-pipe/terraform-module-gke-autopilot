@@ -50,7 +50,7 @@ Example: `sh apply.sh my-first-gcp-project europe-west3-b`
 
 After the cluster is created, you may use this command
 ```
-gcloud container clusters get-credentials my-first-gcp-project --zone europe-west3
+gcloud container clusters get-credentials processing-dev --zone europe-west3
 ```
 in order to get the credentials to use `kubectl`.
 As next step you may define and run pipelines following 
