@@ -26,9 +26,10 @@ Furthermore you need the tool `terraform` installed (https://developer.hashicorp
 Download the files in this folder to a local directory:
 
 ```
-
+git clone --no-checkout --depth=1 https://github.com/k-pipe/terraform-module-gke-autopilot.git
+cd terraform-module-gke-autopilot
+git sparse-checkout set --no-cone example
 ```
-
 
 To install the clusters specified in `main.tf` on the default project and the default zone (sepcified via `gcloud init`), 
 simply run the provided script (in the folder where it is placed):
