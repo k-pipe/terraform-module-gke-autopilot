@@ -1,7 +1,7 @@
 
 # Terraform module for setting up a GKE autopilot cluster
 
-This terraform module sets up a GKE kubernetes cluster in autopilot mode.
+This terraform module sets up a GKE kubernetes cluster in autopilot mode using the [helm chart for the k-pipe pipeline operator](https://helm.k-pipe.cloud/).
 
 ## Components
 
@@ -22,3 +22,7 @@ The terraform module sets up the following ressources:
 | operator_version | version of the pipeline operator to be used                                           |
 | network          | network to be used for k8s cluster                                                    |
 | subnetwork       | subnetwork to be used for k8s cluster                                                 |
+
+## Example
+
+An example on how to use this terraform module in order to setup  one or multiple GKC
