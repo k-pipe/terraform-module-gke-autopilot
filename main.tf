@@ -54,6 +54,7 @@ resource "google_container_cluster" "k8s-cluster" {
   }
 }
 
+# local variable for name of self defined storage class
 locals {
     storage_class = "standard-${var.zone}"
 }
@@ -82,7 +83,7 @@ resource "helm_release" "pipeline-operator" {
   }
 }
 
-# manifest for zone limited storage class
+# manifest for zone-limited storage class
 resource "kubernetes_manifest" "storage-class" {
   manifest = {
     apiVersion = "storage.k8s.io/v1"
@@ -96,10 +97,10 @@ resource "kubernetes_manifest" "storage-class" {
         volumeBindingMode = "WaitForFirstConsumer"
     }
     allowedTopologies = [{
-        matchLabelExpressions = {
+        matchLabelExpressions = [{
           key = "topology.kubernetes.io/zone"
-          values = ["europe-west3-b"]
-        }
+          values = [var.zone]
+        }]
     }]
     }
 }
