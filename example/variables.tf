@@ -1,6 +1,6 @@
-############################
-#  input from commandline  #
-############################
+##################################################
+#  input (from commandline or terraform.tfvars)  #
+##################################################
 variable "project_id" {
   type = string
 }
