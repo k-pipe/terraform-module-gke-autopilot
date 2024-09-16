@@ -32,7 +32,7 @@ git sparse-checkout set --no-cone example
 cd example
 ```
 
-To install the clusters specified in `main.tf` on the default project and the default zone (sepcified via `gcloud init`), 
+To install the clusters specified in `main.tf` in the default project and the default zone (sepcified via `gcloud init`), 
 simply run the provided script (in the folder where it is placed):
 
 ```
@@ -56,5 +56,5 @@ in order to get the credentials to use `kubectl`.
 As next step you may define and run pipelines following 
 the getting started instructions of the [helm chart](https://helm.k-pipe.cloud/).
 
-**NOTE:** We recommend to check in the 5 files used for provisioning into a git repository, so
+**NOTE:** We recommend to commit the 5 files used for provisioning into a git repository, so
 that provisioning can be reproduced at a later time and changes to the configuration may be tracked.
