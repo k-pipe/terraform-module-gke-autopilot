@@ -54,6 +54,10 @@ resource "google_container_cluster" "k8s-cluster" {
   }
 }
 
+locals {
+    storage_class = "standard-${var.zone}"
+}
+
 # helm chart for kubernetes operator
 resource "helm_release" "pipeline-operator" {
   name             = "k-pipe"
@@ -70,10 +74,32 @@ resource "helm_release" "pipeline-operator" {
   }
   set {
     name  = "env.storageClass"
-    value = "standard-${var.zone}"
+    value = local.storage_class
   }
   set {
     name  = "env.fixedInitCommands"
     value = "mkdir input && ln -s /etc/config/config.json input/config.json"
   }
+}
+
+# manifest for zone limited storage class
+resource "kubernetes_manifest" "storage-class" {
+  manifest = {
+    apiVersion = "storage.k8s.io/v1"
+    kind = "StorageClass"
+    metadata = {
+      name = local.storage_class
+    }
+    provisioner = "kubernetes.io/gce-pd"
+    parameters = {
+        type = "pd-standard"
+        volumeBindingMode = "WaitForFirstConsumer"
+    }
+    allowedTopologies = [{
+        matchLabelExpressions = {
+          key = "topology.kubernetes.io/zone"
+          values = ["europe-west3-b"]
+        }
+    }]
+    }
 }
