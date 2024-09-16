@@ -94,8 +94,8 @@ resource "kubernetes_manifest" "storage-class" {
     provisioner = "kubernetes.io/gce-pd"
     parameters = {
         type = "pd-standard"
-        volumeBindingMode = "WaitForFirstConsumer"
     }
+    volumeBindingMode = "WaitForFirstConsumer"
     allowedTopologies = [{
         matchLabelExpressions = [{
           key = "topology.kubernetes.io/zone"
