@@ -19,6 +19,16 @@ else
   ZONE=`gcloud config list --format 'value(compute.zone)'`
 fi
 REGION=`echo $ZONE | sed 's#-[^-]$##'`
+if [[ "$PROJECT_ID" == "" ]]
+then
+  echo "PROJECT_ID is not set (run 'gcloud init' or specify it as first command line argument)"
+  exit 1
+fi
+if [[ "$ZONE" == "" ]]
+then
+  echo "ZONE is not set (run 'gcloud init' or specify it as second command line argument)"
+  exit 1
+fi
 echo "Running terraform with PROJECT_ID=$PROJECT_ID and ZONE=$ZONE, REGION=$REGION"
 #
 # if bucket to store terraform state does not exist, create it
