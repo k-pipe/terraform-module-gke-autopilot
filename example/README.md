@@ -54,7 +54,8 @@ gcloud container clusters get-credentials processing-dev --zone europe-west3
 ```
 in order to get the credentials to use `kubectl`.
 As next step you may define and run pipelines following 
-the getting started instructions of the [helm chart](https://helm.k-pipe.cloud/).
+the getting started instructions of the [helm chart](https://helm.k-pipe.cloud/) (start 
+at section `Define a pipeline`).
 
 **NOTE:** We recommend to commit the 5 files used for provisioning into a git repository, so
 that provisioning can be reproduced at a later time and changes to the configuration may be tracked.
