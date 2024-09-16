@@ -32,7 +32,7 @@ git sparse-checkout set --no-cone example
 cd example
 ```
 
-To install the clusters specified in `main.tf` in the default project and the default zone (sepcified via `gcloud init`), 
+To install the clusters specified in `main.tf` in the default project and the default zone (specified via `gcloud init`), 
 simply run the provided script (in the folder where it is placed):
 
 ```
