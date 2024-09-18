@@ -54,11 +54,6 @@ resource "google_container_cluster" "k8s-cluster" {
   }
 }
 
-# local variable for name of self defined storage class
-locals {
-    storage_class = "standard-${var.zone}"
-}
-
 # helm chart for kubernetes operator
 resource "helm_release" "pipeline-operator" {
   name             = "k-pipe"
@@ -75,7 +70,7 @@ resource "helm_release" "pipeline-operator" {
   }
   set {
     name  = "env.storageClass"
-    value = local.storage_class
+    value = "standard-${var.zone}"
   }
   set {
     name  = "env.fixedInitCommands"
@@ -88,21 +83,9 @@ resource "helm_release" "pipeline-operator" {
 
 # manifest for zone-limited storage class
 resource "kubectl_manifest" "storage-class" {
-    yaml_body = <<YAML
-        kind: StorageClass
-        apiVersion: storage.k8s.io/v1
-        metadata:
-          name: ${local.storage_class}
-        provisioner: kubernetes.io/gce-pd
-        parameters:
-          type: pd-standard
-        volumeBindingMode: WaitForFirstConsumer
-        allowedTopologies:
-          - matchLabelExpressions:
-              - key: topology.kubernetes.io/zone
-                values:
-                  - ${var.zone}
-    YAML
+    yaml_body = templatefile("${path.module}/storage-class.yaml", {
+        zone = var.zone
+    })
     depends_on = [
       google_container_cluster.k8s-cluster
     ]
