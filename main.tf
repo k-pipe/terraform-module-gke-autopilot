@@ -81,6 +81,9 @@ resource "helm_release" "pipeline-operator" {
     name  = "env.fixedInitCommands"
     value = "mkdir input && ln -s /etc/config/config.json input/config.json"
   }
+  depends_on = [
+      google_container_cluster.k8s-cluster
+  ]
 }
 
 # manifest for zone-limited storage class
@@ -103,4 +106,7 @@ resource "kubernetes_manifest" "storage-class" {
         }]
     }]
     }
+    depends_on = [
+      google_container_cluster.k8s-cluster
+    ]
 }
