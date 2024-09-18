@@ -31,6 +31,8 @@ then
 fi
 echo Enabling kubernetes api on project $PROJECT_ID
 gcloud services enable container.googleapis.com
+echo Enabling GCS api on project $PROJECT_ID
+gcloud services enable storage.googleapis.com
 echo "Running terraform with PROJECT_ID=$PROJECT_ID and ZONE=$ZONE, REGION=$REGION"
 #
 # if bucket to store terraform state does not exist, create it
