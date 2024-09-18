@@ -16,8 +16,10 @@ installed (based on the [gke-autopilot terraform module](https://github.com/k-pi
 
 ## Prerequisites
 
-You need to have access to (and sufficient permissions on) a GCP project (https://console.cloud.google.com/). You must
-have an active GCP configuration (set it up using `gcloud init`) and activated credentials (`gcloud auth application-default login`).
+You need to have access to (and sufficient permissions on) a GCP project (https://console.cloud.google.com/). 
+Next, you must have installed the GCP command line util `gcloud` (https://cloud.google.com/sdk/docs/install).
+
+You must have an active GCP configuration (set it up using `gcloud init`) and activated credentials (`gcloud auth application-default login`).
 
 Furthermore you need the tool `terraform` installed (https://developer.hashicorp.com/terraform/install).
 

@@ -29,6 +29,8 @@ then
   echo "ZONE is not set (run 'gcloud init' or specify it as second command line argument)"
   exit 1
 fi
+echo Enabling kubernetes api on project $PROJECT_ID
+gcloud services enable container.googleapis.com
 echo "Running terraform with PROJECT_ID=$PROJECT_ID and ZONE=$ZONE, REGION=$REGION"
 #
 # if bucket to store terraform state does not exist, create it
@@ -42,7 +44,7 @@ fi
 
 # terraform init
 echo "Initializing terraform"
-terraform init -backend-config="bucket=${BUCKET_NAME}"
+terraform init -upgrade -reconfigure -backend-config="bucket=${BUCKET_NAME}"
 
 # terraform apply
 echo "Running terraform apply"

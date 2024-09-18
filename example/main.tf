@@ -13,6 +13,7 @@ module "dev-cluster" {
 
   // predefined parameters
   source           = "git@github.com:k-pipe/terraform-module-gke-autopilot.git"
+  # source = "./.." use this for debugging
   project_id       = var.project_id
   zone             = var.zone
   region           = var.region

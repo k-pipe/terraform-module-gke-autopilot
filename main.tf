@@ -87,25 +87,22 @@ resource "helm_release" "pipeline-operator" {
 }
 
 # manifest for zone-limited storage class
-resource "kubernetes_manifest" "storage-class" {
-  manifest = {
-    apiVersion = "storage.k8s.io/v1"
-    kind = "StorageClass"
-    metadata = {
-      name = local.storage_class
-    }
-    provisioner = "kubernetes.io/gce-pd"
-    parameters = {
-        type = "pd-standard"
-    }
-    volumeBindingMode = "WaitForFirstConsumer"
-    allowedTopologies = [{
-        matchLabelExpressions = [{
-          key = "topology.kubernetes.io/zone"
-          values = [var.zone]
-        }]
-    }]
-    }
+resource "kubectl_manifest" "storage-class" {
+    yaml_body = <<YAML
+        kind: StorageClass
+        apiVersion: storage.k8s.io/v1
+        metadata:
+          name: ${local.storage_class}
+        provisioner: kubernetes.io/gce-pd
+        parameters:
+          type: pd-standard
+        volumeBindingMode: WaitForFirstConsumer
+        allowedTopologies:
+          - matchLabelExpressions:
+              - key: topology.kubernetes.io/zone
+                values:
+                  - ${var.zone}
+    YAML
     depends_on = [
       google_container_cluster.k8s-cluster
     ]
