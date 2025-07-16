@@ -58,7 +58,7 @@ resource "google_container_cluster" "k8s-cluster" {
 resource "helm_release" "pipeline-operator" {
   name             = "k-pipe"
   chart            = "operator"
-  repository       = "https://helm.k-pipe.cloud"
+  repository       = "https://k-pipe.github.io/helm/"
   namespace        = "k-pipe"
   version          = var.operator_version
   create_namespace = true
