@@ -72,7 +72,7 @@ resource "helm_release" "pipeline-operator" {
     name  = "env.storageClass"
     value = "standard-${var.zone}"
   }
-  dynamic "set" {
+  dynamic "set_string" {
     for_each = var.helm_parameters
     content {
       name  = "env.${set_string.key}"
