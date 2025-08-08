@@ -75,8 +75,8 @@ resource "helm_release" "pipeline-operator" {
   dynamic "set" {
     for_each = var.helm_parameters
     content {
-      name  = "env.${set.key}"
-      value = "${set.value}"
+      name  = "env.${set_string.key}"
+      value = "${set_string.value}"
     }
   }
   depends_on = [
