@@ -76,7 +76,7 @@ resource "helm_release" "pipeline-operator" {
     for_each = var.helm_parameters
     content {
       name  = "env.${set_string.key}"
-      value = "${set_string.value}"
+      value = set_string.value
     }
   }
   depends_on = [
