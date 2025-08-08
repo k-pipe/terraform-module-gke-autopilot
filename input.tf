@@ -36,3 +36,11 @@ variable "subnetwork" {
   type = string
   description = "subnetwork to be used for k8s cluster"
 }
+
+variable "helm_parameters" {
+  type = map
+  description = "map with additional settings for pipeline operator helm chart"
+  default = {
+  }
+}
+

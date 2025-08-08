@@ -72,9 +72,12 @@ resource "helm_release" "pipeline-operator" {
     name  = "env.storageClass"
     value = "standard-${var.zone}"
   }
-  set {
-    name  = "env.fixedInitCommands"
-    value = "mkdir input && ln -s /etc/config/config.json input/config.json"
+  dynamic "set" {
+    for_each = var.helm_parameters
+    content {
+      name  = "env.${set.key}"
+      value = set.value
+    }
   }
   depends_on = [
       google_container_cluster.k8s-cluster
